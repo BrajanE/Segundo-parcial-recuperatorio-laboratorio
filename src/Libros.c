@@ -85,9 +85,9 @@ int libro_getId(eLibro* this,int* id)
 }
 
 /**
- * Toma un dato Nombre y lo guarda en el listado
+ * Toma un dato Titulo y lo guarda en el listado
  * @param this
- * @param nombre
+ * @param titulo
  * @return
  */
 int libro_setTitulo(eLibro* this,char* titulo)
@@ -103,9 +103,9 @@ int libro_setTitulo(eLibro* this,char* titulo)
 }
 
 /**
- * Toma un Nombre del listado y lo guarda en la variable nombre que luego se enviara por puntero
+ * Toma un titulo del listado y lo guarda en la variable nombre que luego se enviara por puntero
  * @param this
- * @param nombre
+ * @param titulo
  * @return
  */
 int libro_getTitulo(eLibro* this,char* titulo)
@@ -121,9 +121,9 @@ int libro_getTitulo(eLibro* this,char* titulo)
 }
 
 /**
- * Toma un dato nuevo "horas trabajadas" y lo guarda en el listado
+ * Toma un dato nuevo Autor y lo guarda en el listado
  * @param this
- * @param horasTrabajadas
+ * @param autor
  * @return
  */
 int libro_setAutor(eLibro* this,char* autor)
@@ -138,9 +138,9 @@ int libro_setAutor(eLibro* this,char* autor)
 	return rtn;
 }
 /**
- * Toma un dato de Horas trabajadas del listado y lo guarda en la variable "horas trabajadas" que luego se enviara por puntero
+ * Toma un dato de autor del listado y lo guarda en la variable "horas trabajadas" que luego se enviara por puntero
  * @param this
- * @param horasTrabajadas
+ * @param autor
  * @return
  */
 int libro_getAutor(eLibro* this,char* autor)
@@ -156,9 +156,9 @@ int libro_getAutor(eLibro* this,char* autor)
 }
 
 /**
- * Toma un dato "sueldo" y lo guarda en el listado
+ * Toma un dato precio y lo guarda en el listado
  * @param this
- * @param sueldo
+ * @param precio
  * @return
  */
 int libro_setPrecio(eLibro* this,float precio)
@@ -174,9 +174,9 @@ int libro_setPrecio(eLibro* this,float precio)
 }
 
 /**
- * Toma un dato de "sueldo" del listado y lo guarda en la variable "sueldo" que luego se enviara por puntero
+ * Toma un dato de precio del listado y lo guarda en la variable "sueldo" que luego se enviara por puntero
  * @param this
- * @param sueldo
+ * @param precio
  * @return
  */
 int libro_getPrecio(eLibro* this,float* precio)
@@ -192,9 +192,9 @@ int libro_getPrecio(eLibro* this,float* precio)
 }
 
 /**
- * Toma un dato ID y lo guarda en el listado
+ * Toma un dato IDeditorial y lo guarda en el listado
  * @param this
- * @param id
+ * @param idEditorial
  * @return rtn
  */
 int libro_setIdEditorial(eLibro* this,int idEditorial)
@@ -210,9 +210,9 @@ int libro_setIdEditorial(eLibro* this,int idEditorial)
 }
 
 /**
- * Toma un Id del listado y lo guarda en la variable id que luego se enviara por puntero
+ * Toma un IdEditorial del listado y lo guarda en la variable id que luego se enviara por puntero
  * @param this
- * @param id
+ * @param idEditorial
  * @return
  */
 int libro_getIdEditorial(eLibro* this,int* idEditorial)

@@ -70,7 +70,8 @@ int main(void)
 				pll_ListaMinotauro= ll_filter(pll_listaLibros, SelecEdMinotauro);
 				if(pll_ListaMinotauro!=NULL)
 				{
-					corroboracion= MostrarListadoMinotauro(pll_ListaMinotauro);
+					//corroboracion= MostrarListadoMinotauro(pll_ListaMinotauro);
+					corroboracion = controller_ListLibros(pll_ListaMinotauro);
 					if(corroboracion==1)
 					{
 						corroboracion =controller_SaveLibrosAsText("MinotauroEditorial.csv", pll_ListaMinotauro);
@@ -83,20 +84,23 @@ int main(void)
 			}
 			break;
 		case 5:
-			pll_ListaConDescuestos= ll_map (pll_listaLibros, AplicarDescuento);
-			//PrintLibro(pll_ListaConDescuestos, 6);
-			//PrintLibro(pll_ListaConDescuestos, 16);
-			if(pll_ListaConDescuestos!=NULL)
+			if(flagOpcion!=-1)
 			{
-				corroboracion =controller_SaveLibrosAsText("Mapeado.csv", pll_ListaConDescuestos);
-				MensajeDeCorroboracion(corroboracion,"Listado guardado en archivo 'Mapeado.csv'.\n","Error escribir archivo.\n");
-				if(corroboracion==1)
+				pll_ListaConDescuestos= ll_map (pll_listaLibros, AplicarDescuento);
+				//PrintLibro(pll_ListaConDescuestos, 6);
+				//PrintLibro(pll_ListaConDescuestos, 16);
+				if(pll_ListaConDescuestos!=NULL)
 				{
-					MostrarMapeado();
-					opcion=PedirEnteroFull("Ingrese opcion: ",2);
-					if(opcion==1)
+					corroboracion =controller_SaveLibrosAsText("Mapeado.csv", pll_ListaConDescuestos);
+					MensajeDeCorroboracion(corroboracion,"Listado guardado en archivo 'Mapeado.csv'.\n","Error escribir archivo.\n");
+					if(corroboracion==1)
 					{
-						MostrarListas(pll_ListaConDescuestos, pll_ListaEditorales);
+						MostrarMapeado();
+						opcion=PedirEnteroFull("Ingrese opcion: ",2);
+						if(opcion==1)
+						{
+							MostrarListas(pll_ListaConDescuestos, pll_ListaEditorales);
+						}
 					}
 				}
 			}
@@ -105,18 +109,25 @@ int main(void)
 			}
 			break;
 		case 6:
-			cantLibrosMayor500 = ll_count(pll_listaLibros,OperacionesConPrecios,&precioTotalPearson);
-			if(cantLibrosMayor500>0)
+			if(flagOpcion!=-1)
 			{
-				printf("La cantidad de Libros con valor mayor a 500 es:\n"
-						"Total: %d\n", cantLibrosMayor500);
+				cantLibrosMayor500 = ll_count(pll_listaLibros,OperacionesConPrecios,&precioTotalPearson);
+				if(cantLibrosMayor500>0)
+					{
+						printf("La cantidad de Libros con valor mayor a 500 es:\n"
+								"Total: %d\n", cantLibrosMayor500);
+					}
 			}
 			break;
 		case 7:
-			if(precioTotalPearson!=-1)
+			if(flagOpcion!=-1)
 			{
-				printf("La sumatoria de los precios de los libros de la editorial PEARSON es:\n"
-						"Total: %.2f\n",precioTotalPearson);
+				cantLibrosMayor500 = ll_count(pll_listaLibros,OperacionesConPrecios,&precioTotalPearson);
+				if(precioTotalPearson!=-1)
+				{
+					printf("La sumatoria de los precios de los libros de la editorial PEARSON es:\n"
+							"Total: %.2f\n",precioTotalPearson);
+				}
 			}
 			break;
 

@@ -2,7 +2,7 @@
 
 /**
  * Inicia el Array
- * @return
+ * @return eEditorial
  */
 eEditorial* editoriales_new()
 {
@@ -16,9 +16,7 @@ eEditorial* editoriales_new()
  * funcion alberga las demas funciones del set, toma cada dato y los guarda en la variable correspondiente
  * @param idStr
  * @param nombreStr
- * @param horasTrabajadasStr
- * @param sueldoStr
- * @return
+ * @return eEditorial
  */
 eEditorial* editorial_newParametros(char* idEditorialStr, char* nombreStr)
 {

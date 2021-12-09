@@ -4,7 +4,12 @@
 #include "LinkedList.h"
 //#include "../inc/LinkedList.h"
 
-
+/**
+ *
+ * @param this
+ * @param nodeIndex
+ * @return
+ */
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
 
@@ -548,7 +553,12 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 	}
     return returnAux;
 }
-
+/**
+ * @brief genera un listado con los elementos de una editorial especifica
+ * @param this
+ * @param fn
+ * @return linkedlist
+ */
 LinkedList* ll_filter(LinkedList* this, int (*fn)(void*))
 {
 	LinkedList* ListaEditMinotauro=NULL;
@@ -573,15 +583,19 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void*))
 	}
 	return ListaEditMinotauro;
 }
-
-LinkedList* ll_map (LinkedList* this, void* (*fn)(void*, float*))
+/***
+ * @brief realiza un listado con descuento en ciertas editoriales
+ * @param this
+ * @param fn
+ * @return linkedlist
+ */
+LinkedList* ll_map (LinkedList* this, void* (*fn)(void*))
 {
 	LinkedList* ListaConDescuestos=NULL;
 	ListaConDescuestos=ll_clone(this);
 	int len=ll_len(this);
 	void* pElementoBuscado;
 	void* pAuxiliar;
-	float descuento;
 	if(this!=NULL && len>0)
 	{
 		for(int i=0;i<len;i++)
@@ -589,14 +603,20 @@ LinkedList* ll_map (LinkedList* this, void* (*fn)(void*, float*))
 			pElementoBuscado=ll_get(this,i);
 			if(pElementoBuscado!=NULL)
 			{
-				pAuxiliar=fn(pElementoBuscado,&descuento);
+				pAuxiliar=fn(pElementoBuscado);
 				ll_set(ListaConDescuestos,i,pAuxiliar);
 			}
 		}
 	}
 	return ListaConDescuestos;
 }
-
+/***
+ * @brief realiza un conteo de los elementos de la lista
+ * @param this
+ * @param fn
+ * @param totalPearson
+ * @return int
+ */
 int ll_count(LinkedList* this, int (*fn)(void*,float*),float* totalPearson)
 {
 	int rtn=-1;
@@ -616,10 +636,11 @@ int ll_count(LinkedList* this, int (*fn)(void*,float*),float* totalPearson)
 				corroboracion=fn(pElementoBuscado,&precioTotalPearson);
 				if(corroboracion == 1)
 				{
-					rtn=contadorLibrosMas500++;
+					contadorLibrosMas500++;
 				}
 				*totalPearson=precioTotalPearson;
 			}
+			rtn=contadorLibrosMas500;
 		}
 	}
 	return rtn;

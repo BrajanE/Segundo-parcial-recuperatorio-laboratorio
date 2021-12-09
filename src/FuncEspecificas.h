@@ -13,7 +13,7 @@ int SortByAutor(void* primerDato, void* segundoDato);
 void PrintLibro(LinkedList* pll_listaLibros, int index);
 int SelecEdMinotauro(void* pElement);
 void MostrarLibroEdMinotauro(LinkedList* ListaEditMinotauro, int index);
-void* AplicarDescuento(void* pElement, float* pDescuento);
+void* AplicarDescuento(void* pElement);
 int OperacionesConPrecios(void* pElement, float* precioTotal);
 
 #endif /* FUNCESPECIFICAS_H_ */

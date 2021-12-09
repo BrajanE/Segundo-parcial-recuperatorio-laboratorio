@@ -7,7 +7,9 @@
 #include "Editoriales.h"
 #include "Parser.h"
 #include "FuncEspecificas.h"
-
+/// @param primerDato
+/// @param segundoDato
+/// @return int
 int SortByAutor(void* primerDato, void* segundoDato)
 {
 	eLibro* primerLibro;
@@ -21,7 +23,9 @@ int SortByAutor(void* primerDato, void* segundoDato)
 	}
 	return comparacion;
 }
-
+/// @imprime un solo libro
+/// @param pll_listaLibros
+/// @param index
 void PrintLibro(LinkedList* pll_listaLibros, int index)
 {
 	eLibro* pLibrosAuxiliar;
@@ -40,10 +44,12 @@ void PrintLibro(LinkedList* pll_listaLibros, int index)
 		libro_getPrecio(pLibrosAuxiliar,&precio);
 		libro_getIdEditorial(pLibrosAuxiliar,&libroIdEditorial);
 
-		printf("%d\t%s\t\t%s\t\t%.2f\t\t%d\n", id,titulo,autor,precio, libroIdEditorial);
+		printf("%d\t%s%25s%20.2f%20d\n", id,titulo,autor,precio, libroIdEditorial);
 	}
 }
-
+/// funcion parametro que selecciona los elementos de la editorial minotauro
+/// @param pElement
+/// @return int
 int SelecEdMinotauro(void* pElement)
 {
 	int rtn =0;
@@ -58,7 +64,9 @@ int SelecEdMinotauro(void* pElement)
 	}
 	return rtn;
 }
-
+/// @brief muestra la lista de editorial minotauro
+/// @param ListaEditMinotauro
+/// @param index
 void MostrarLibroEdMinotauro(LinkedList* ListaEditMinotauro, int index)
 {
 	eLibro* pLibrosAuxiliar;
@@ -79,8 +87,10 @@ void MostrarLibroEdMinotauro(LinkedList* ListaEditMinotauro, int index)
 		printf("%d\t%s\t\t%s\t\t%.2f\n", id,titulo,autor,precio);
 	}
 }
-
-void* AplicarDescuento(void* pElement, float* pDescuento)
+/// @brief toma un pElement y realiza los calculos de descuentos segun editorial y precio
+/// @param pElement
+/// @param pDescuento
+void* AplicarDescuento(void* pElement)
 {
 	eLibro* pLibroBuscado;
 	pLibroBuscado = (eLibro*) pElement;
@@ -94,11 +104,13 @@ void* AplicarDescuento(void* pElement, float* pDescuento)
 		{
 			pLibroBuscado->precio=pLibroBuscado->precio*0.9;
 		}
-		*pDescuento=pLibroBuscado->precio;
 	}
 	return pLibroBuscado;
 }
-
+/// @brief toma el pElement y reliza un conteo y/o suma de los precios correspondientes a una editorial
+/// @param pElement
+/// @param precioTotal
+/// @return contador y por punteo la suma de los precios totales
 int OperacionesConPrecios(void* pElement, float* precioTotal)
 {
 	int rtn =0;

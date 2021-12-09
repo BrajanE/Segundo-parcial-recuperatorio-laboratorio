@@ -40,12 +40,10 @@ int controller_loadFromText(char* path , LinkedList* pll_listaLibros, LinkedList
     return rtn;
 }
 
-/** \brief Listar empleados
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
+/**
+ * @brief muestra el listado de libros
+ * @param pll_listaLibros
+ * @return
  */
 
 int controller_ListLibros(LinkedList* pll_listaLibros)
@@ -56,7 +54,7 @@ int controller_ListLibros(LinkedList* pll_listaLibros)
 
     if(pll_listaLibros!=NULL)
     {
-    	printf("ID\tTitulo\t\tAutor\t\tPrecio\t\tID\t\tEditorial\n");
+    	printf("ID\tTitulo\t\t\tAutor\t\t\tPrecio\t\tIDEditorial\n");
     	for(int i=0;i<lenLibros;i++)
     	{
     		PrintLibro(pll_listaLibros,i);
@@ -65,7 +63,12 @@ int controller_ListLibros(LinkedList* pll_listaLibros)
     }
 	return rtn;
 }
-
+/**
+ * @brief muestra 2 listas
+ * @param pll_listaLibros
+ * @param pll_ListaEditorales
+ * @return
+ */
 int MostrarListas(LinkedList* pll_listaLibros, LinkedList* pll_ListaEditorales)
 {
 	int rtn=-1;
@@ -84,7 +87,7 @@ int MostrarListas(LinkedList* pll_listaLibros, LinkedList* pll_ListaEditorales)
 
 	if(pll_listaLibros!=NULL && pll_ListaEditorales!=NULL && lenEditoriales>0 && lenLibros>0)
 	{
-		printf("ID\tTitulo\t\tAutor\t\tPrecio\t\tID\t\tEditorial\n");
+		printf("ID\tTitulo             Autor                   Precio            ID Editorial\n");
 		for(int i=0; i<lenLibros;i++)
 		{
 			pLibrosAuxiliar = ll_get(pll_listaLibros, i);
@@ -105,7 +108,7 @@ int MostrarListas(LinkedList* pll_listaLibros, LinkedList* pll_ListaEditorales)
 						editorial_getNombre(pEditorialesAuxiliar,nombre);
 						if(libroIdEditorial == EdIdEditorial)
 						{
-							printf("%d\t%s\t\t%s\t\t%.2f\t\t%s\n", id,titulo,autor,precio, nombre);
+							printf("%d\t%s%25s%20.2f%20s\n", id,titulo,autor,precio, nombre);
 						}
 					}
 				}
@@ -114,7 +117,11 @@ int MostrarListas(LinkedList* pll_listaLibros, LinkedList* pll_ListaEditorales)
 	}
 	return rtn;
 }
-
+/**
+ * @brief muestra el listado de minotauro unicamente
+ * @param ListaEditMinotauro
+ * @return
+ */
 int MostrarListadoMinotauro(LinkedList* ListaEditMinotauro)
 {
 	int rtn=-1;
@@ -130,7 +137,12 @@ int MostrarListadoMinotauro(LinkedList* ListaEditMinotauro)
 	}
 	return rtn;
 }
-
+/**
+ *
+ * @param path
+ * @param this
+ * @return
+ */
 int controller_SaveLibrosAsText(char* path, LinkedList* this)
 {
 	int rtn=-1;
