@@ -5,8 +5,11 @@ void MostrarMenu()
 	printf("1- Leer/Cargar archivos.\n"
 			"2- Ordenar la lista generada de forma ascendente por autor.\n"
 			"3- Imprimer datos de los libros y editorial.\n"
-			"4- Listado de libros de la editorial MINOTAURO.\n"
-			"5- SALIR.\n");
+			"4- Listado y gardado de libros de la editorial MINOTAURO.\n"
+			"5- Generar archivo de salida 'mapeado.csv', luego de aplicar funcion map.\n"
+			"6- Mostrar cantidad de libros con precio mayor a 500.\n"
+			"7- Mostrar sumatoria del valor total de libros de editorial PEARSON.\n"
+			"8- SALIR.\n");
 }
 
 void MostrarMenuDeCarga()
@@ -16,6 +19,11 @@ void MostrarMenuDeCarga()
 			"\t3- Para volver al menu ingrese cualquier digito.\n");
 }
 
+void MostrarMapeado()
+{
+	printf("\t1- Ver lista con descuentos.\n"
+			"\t2- Volver al menu principal.\n");
+}
 /*****************************************************************************************/
 
 void MensajeDeCorroboracion(int corroboracion, char mensajeOk[], char mensajeError[])
@@ -104,8 +112,37 @@ void GetString(char mensaje[], char stringIngresado[])
 
 void PedirArchivo(char mensaje[], char stringIngresado[])
 {
+	int contadorError=0;
 	printf("%s",mensaje);
 	fflush(stdin);
 	scanf("%[^\n]",stringIngresado);
 	CorreccionDeCadenas(stringIngresado);
+	while(strcmp(stringIngresado,"Libro.csv")!=0 && strcmp(stringIngresado,"Editorial.csv")!=0 && contadorError<2)
+	{
+		printf("%s",mensaje);
+		fflush(stdin);
+		scanf("%[^\n]",stringIngresado);
+		CorreccionDeCadenas(stringIngresado);
+		contadorError++;
+	}
+
+}
+
+int CorroboracionDeCargado(int flagCarga)
+{
+	int rtn = -1;
+	switch (flagCarga)
+	{
+	case -1:
+		printf("Error en la carga.\n");
+		break;
+	case 1:
+		printf("Archivo de Libros cargado.\n");
+		break;
+	case 2:
+		printf("Archivo de Editoriales cargado.\n");
+		rtn = 3;
+		break;
+	}
+	return rtn;
 }

@@ -7,7 +7,7 @@
 eLibro* libros_new()
 {
 	eLibro* plistaLibros;
-	plistaLibros = (eLibro*) calloc(sizeof(eLibro),1);
+	plistaLibros = (eLibro*) malloc(sizeof(eLibro));
 
 	return plistaLibros;
 }
@@ -22,7 +22,8 @@ eLibro* libros_new()
  */
 eLibro* libro_newParametros(char* idStr,char* tituloStr,char* autorStr,char* precioStr,char* idEditorialStr)
 {
-	eLibro* plistaLibros = libros_new();
+	eLibro* plistaLibros;
+	plistaLibros = libros_new();
 	if(plistaLibros!=NULL && idStr!=NULL && tituloStr!=NULL && autorStr!=NULL && precioStr!=NULL && idEditorialStr!=NULL)
 	{
 		libro_setId(plistaLibros, atoi(idStr));

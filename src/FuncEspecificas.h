@@ -10,8 +10,10 @@
 #include "Parser.h"
 
 int SortByAutor(void* primerDato, void* segundoDato);
-void PrintArraysLibros(LinkedList* pll_listaLibros, int index);
-void CargarArchivo(char* path , LinkedList* pll_listaLibros);
-
+void PrintLibro(LinkedList* pll_listaLibros, int index);
+int SelecEdMinotauro(void* pElement);
+void MostrarLibroEdMinotauro(LinkedList* ListaEditMinotauro, int index);
+void* AplicarDescuento(void* pElement, float* pDescuento);
+int OperacionesConPrecios(void* pElement, float* precioTotal);
 
 #endif /* FUNCESPECIFICAS_H_ */

@@ -10,5 +10,7 @@
 #include "Controller.h"
 
 int parser_LibrosFromText(FILE* pFile , LinkedList* pll_listaLibros);
+int parser_EditorialFromText(FILE* pFile , LinkedList* pll_ListaEditorales);
+int parser_SaveLibrosAsText(LinkedList* this, FILE* path);
 
 #endif /* PARSER_H_ */

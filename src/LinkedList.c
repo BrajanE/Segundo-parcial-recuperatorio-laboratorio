@@ -112,10 +112,10 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     		pNodeNuevo->pNextNode=this->pFirstNode;
     		this->pFirstNode=pNodeNuevo;
     	}
-    	else if(this->pFirstNode==NULL)
+    	/*else if(this->pFirstNode==NULL)
     	{
     		this->pFirstNode=pNodeNuevo;
-    	}else
+    	}*/ else
     	{
     		pNodeAnterior=getNode(this, nodeIndex-1);
     		pNodeSiguiente=pNodeAnterior->pNextNode;
@@ -152,10 +152,9 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    int nodeIndex;
     if(this != NULL)
     {
-    	nodeIndex=ll_len(this);
+    	int nodeIndex=ll_len(this);
     	returnAux=addNode(this, nodeIndex, pElement);
     }
     return returnAux;
@@ -173,17 +172,16 @@ void* ll_get(LinkedList* this, int index)
 {
     void* returnAux = NULL;
     int len=ll_len(this);
-    Node* pNodeObtenido;
     if(this!=NULL && index>=0 && index<len)
     {
+    	Node* pNodeObtenido;
     	pNodeObtenido=getNode(this, index);
     	if(pNodeObtenido!=NULL)
     	{
-    		returnAux=pNodeObtenido->pElement; //validar en caso de error antes del return
+    		returnAux=pNodeObtenido->pElement;
     	}
     }
-
-    return returnAux;//tiene que retornar el pElement, que esta en un nodo
+    return returnAux;
 }
 
 
@@ -305,7 +303,6 @@ int ll_indexOf(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
     int len=ll_len(this);
-    //Node* pNodeBuscado;
     void* pAuxElement;
     if(this!=NULL)
     {
@@ -317,12 +314,6 @@ int ll_indexOf(LinkedList* this, void* pElement)
     			returnAux=i;
     			break;
     		}
-    		//pNodeBuscado=getNode(this,i);
-    		/*if(pNodeBuscado->pElement==pElement)//como comparar direccion de memorias
-    		{
-    			returnAux=i;
-    			break;
-    		}*/
     	}
     }
     return returnAux;
@@ -473,7 +464,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     int len=ll_len(this);
     void* pNuevoElement;
     if(this!=NULL && pNuevaLista!=NULL)
-    {	// (from<0 || from>len) || (to<=from || to>len) consigna para null
+    {
     	if((from>=0 && from<=len) && (to>from && to<=len))
     	{
     		for(int i=from;i<to;i++)
@@ -558,9 +549,78 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
     return returnAux;
 }
 
-LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element))
+LinkedList* ll_filter(LinkedList* this, int (*fn)(void*))
 {
-	LinkedList* newList=NULL;
+	LinkedList* ListaEditMinotauro=NULL;
+	ListaEditMinotauro=ll_newLinkedList();
+	int len=ll_len(this);
+	void* pElementoBuscado;
+	int corroboracion;
+	if(this!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			pElementoBuscado=ll_get(this,i);
+			if(pElementoBuscado!=NULL)
+			{
+				corroboracion=fn(pElementoBuscado);
+				if(corroboracion == 1)
+				{
+					ll_add(ListaEditMinotauro, pElementoBuscado);
+				}
+			}
+		}
+	}
+	return ListaEditMinotauro;
+}
 
-	return newList;
+LinkedList* ll_map (LinkedList* this, void* (*fn)(void*, float*))
+{
+	LinkedList* ListaConDescuestos=NULL;
+	ListaConDescuestos=ll_clone(this);
+	int len=ll_len(this);
+	void* pElementoBuscado;
+	void* pAuxiliar;
+	float descuento;
+	if(this!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			pElementoBuscado=ll_get(this,i);
+			if(pElementoBuscado!=NULL)
+			{
+				pAuxiliar=fn(pElementoBuscado,&descuento);
+				ll_set(ListaConDescuestos,i,pAuxiliar);
+			}
+		}
+	}
+	return ListaConDescuestos;
+}
+
+int ll_count(LinkedList* this, int (*fn)(void*,float*),float* totalPearson)
+{
+	int rtn=-1;
+	int len=ll_len(this);
+	void* pElementoBuscado;
+	int corroboracion;
+	int contadorLibrosMas500=0;
+	float precioTotalPearson=0;
+
+	if(this!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			pElementoBuscado=ll_get(this,i);
+			if(pElementoBuscado!=NULL)
+			{
+				corroboracion=fn(pElementoBuscado,&precioTotalPearson);
+				if(corroboracion == 1)
+				{
+					rtn=contadorLibrosMas500++;
+				}
+				*totalPearson=precioTotalPearson;
+			}
+		}
+	}
+	return rtn;
 }

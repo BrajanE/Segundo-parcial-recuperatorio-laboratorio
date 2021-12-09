@@ -7,6 +7,7 @@
 
 void MostrarMenu();
 void MostrarMenuDeCarga();
+void MostrarMapeado();
 
 void MensajeDeCorroboracion(int corroboracion, char mensajeOk[], char mensajeError[]);
 int PedirEntero(char mensaje[]);
@@ -15,7 +16,7 @@ void CorreccionDeCadenas(char array[]);
 int ValidacionDeStrings(char array[]);
 void GetString(char mensaje[], char stringIngresado[]);
 void PedirArchivo(char mensaje[], char stringIngresado[]);
-
+int CorroboracionDeCargado(int flagCarga);
 
 
 

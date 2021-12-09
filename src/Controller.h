@@ -10,7 +10,10 @@
 #include "Parser.h"
 #include "FuncEspecificas.h"
 
-int controller_loadFromText(char* path , LinkedList* pll_listaLibros);
+int controller_loadFromText(char* path , LinkedList* pll_listaLibros, LinkedList* pll_ListaEditorales);
 int controller_ListLibros(LinkedList* pll_listaLibros);
+int MostrarListas(LinkedList* pll_listaLibros, LinkedList* pll_ListaEditorales);
+int MostrarListadoMinotauro(LinkedList* ListaEditMinotauro);
+int controller_SaveLibrosAsText(char* path, LinkedList* this);
 
 #endif /* CONTROLLER_H_ */

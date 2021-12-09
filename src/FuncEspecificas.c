@@ -22,7 +22,7 @@ int SortByAutor(void* primerDato, void* segundoDato)
 	return comparacion;
 }
 
-void PrintArraysLibros(LinkedList* pll_listaLibros, int index)
+void PrintLibro(LinkedList* pll_listaLibros, int index)
 {
 	eLibro* pLibrosAuxiliar;
 	int id;
@@ -30,44 +30,93 @@ void PrintArraysLibros(LinkedList* pll_listaLibros, int index)
 	char autor[51];
 	float precio;
 	int libroIdEditorial;
+	if(pll_listaLibros!=NULL)
+	{
+		pLibrosAuxiliar = ll_get(pll_listaLibros, index);
 
-	pLibrosAuxiliar = ll_get(pll_listaLibros, index);
+		libro_getId(pLibrosAuxiliar,&id);
+		libro_getTitulo(pLibrosAuxiliar,titulo);
+		libro_getAutor(pLibrosAuxiliar,autor);
+		libro_getPrecio(pLibrosAuxiliar,&precio);
+		libro_getIdEditorial(pLibrosAuxiliar,&libroIdEditorial);
 
-	libro_getId(pLibrosAuxiliar,&id);
-	libro_getTitulo(pLibrosAuxiliar,titulo);
-	libro_getAutor(pLibrosAuxiliar,autor);
-	libro_getPrecio(pLibrosAuxiliar,&precio);
-	libro_getIdEditorial(pLibrosAuxiliar,&libroIdEditorial);
-
-
-	printf("%d\t\t%s\t\t%s\t%.2f\t%d\n", id,titulo,autor,precio,libroIdEditorial);
-
+		printf("%d\t%s\t\t%s\t\t%.2f\t\t%d\n", id,titulo,autor,precio, libroIdEditorial);
+	}
 }
 
-void CargarArchivo(char* path , LinkedList* pll_listaLibros)
+int SelecEdMinotauro(void* pElement)
 {
-	FILE* pLibros;
-	eLibro* pListaLibros=libros_new();
-	eLibro* auxiliar=libros_new();
-	char  idStr [100];
-	char tituloStr[100];
-	char autorStr[100];
-	char precioStr[100];
-	char idEditorial[100];
-	int i=0;
-	pLibros = fopen(path,"r");
-	while(!feof(pLibros))
+	int rtn =0;
+	eLibro* pLibroBuscado;
+	pLibroBuscado = (eLibro*) pElement;
+	if(pLibroBuscado!=NULL)
 	{
-		fscanf(pLibros,"%[^,],%[^,],%[^,],%[^,],%[^\n]\n",idStr,tituloStr,autorStr,precioStr,idEditorial);
-		auxiliar->id = atoi(idStr);
-		strcpy(auxiliar->titulo,tituloStr);
-		strcpy(auxiliar->autor,autorStr);
-		auxiliar->precio=atof(precioStr);
-		auxiliar->idEditorial = atoi(idEditorial);
-		pListaLibros[i]=auxiliar[i];
-		ll_add(pll_listaLibros, pListaLibros);
-		i++;
+		if(pLibroBuscado->idEditorial == 4)
+		{
+			rtn=1;
+		}
 	}
+	return rtn;
+}
 
-	fclose(pLibros);
+void MostrarLibroEdMinotauro(LinkedList* ListaEditMinotauro, int index)
+{
+	eLibro* pLibrosAuxiliar;
+	int id;
+	char titulo[100];
+	char autor[51];
+	float precio;
+	//int libroIdEditorial;
+	if(ListaEditMinotauro!=NULL)
+	{
+		pLibrosAuxiliar = ll_get(ListaEditMinotauro, index);
+		libro_getId(pLibrosAuxiliar,&id);
+		libro_getTitulo(pLibrosAuxiliar,titulo);
+		libro_getAutor(pLibrosAuxiliar,autor);
+		libro_getPrecio(pLibrosAuxiliar,&precio);
+		//libro_getIdEditorial(pLibrosAuxiliar,&libroIdEditorial);
+
+		printf("%d\t%s\t\t%s\t\t%.2f\n", id,titulo,autor,precio);
+	}
+}
+
+void* AplicarDescuento(void* pElement, float* pDescuento)
+{
+	eLibro* pLibroBuscado;
+	pLibroBuscado = (eLibro*) pElement;
+	if(pLibroBuscado!=NULL)
+	{
+		if(pLibroBuscado->idEditorial == 1 && pLibroBuscado->precio>=300)
+		{
+			pLibroBuscado->precio=pLibroBuscado->precio*0.8;
+		}
+		if(pLibroBuscado->idEditorial == 2 && pLibroBuscado->precio<=200)
+		{
+			pLibroBuscado->precio=pLibroBuscado->precio*0.9;
+		}
+		*pDescuento=pLibroBuscado->precio;
+	}
+	return pLibroBuscado;
+}
+
+int OperacionesConPrecios(void* pElement, float* precioTotal)
+{
+	int rtn =0;
+	float total=0;
+	total=*precioTotal;
+	eLibro* pLibroBuscado;
+	pLibroBuscado = (eLibro*) pElement;
+	if(pLibroBuscado!=NULL)
+	{
+		if(pLibroBuscado->precio >= 500)
+		{
+			rtn=1;
+		}
+		if(pLibroBuscado->idEditorial==3)
+		{
+			total=pLibroBuscado->precio+total;
+		}
+		*precioTotal=total;
+	}
+	return rtn;
 }
